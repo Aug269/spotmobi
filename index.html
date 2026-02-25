@@ -1,116 +1,118 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SpotMobi - Ganhe nas Corridas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpotMobi - Ganhe nas Corridas</title>
 
-  <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#3b82f6">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3b82f6">
 </head>
+
 <body>
-  <div class="app">
-    <!-- TELA INÍCIO -->
-    <div id="screen-inicio" class="screen active">
-      <div class="dashboard-header">
-        <div>
-          <div class="user-greeting">Bem-vindo!</div>
-          <div id="planoAtual" class="user-plan">Gratuito</div>
-        </div>
-        <div class="stats-quick">
-          Ganho atual: <span class="ganho-atual">R$0.20</span>/spot
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="label">Destino</div>
-        <input id="destinoInput" placeholder="Av. Paulista, Centro...">
-        <button id="btnSalvarDestino">Buscar</button>
-        <div id="destinoAtual">Nenhum destino</div>
-      </div>
-
-      <div class="card">
-        <div class="timeline-container">
-          <div class="timeline-header">
-            <span>0 min</span>
-            <span id="timelineCounter" class="timeline-counter">0 min</span>
-            <span id="totalPlanMin">45 min</span>
-          </div>
-          <div id="timeline" class="timeline">
-            <div class="timeline-bar">
-              <div id="timelineSlider" class="timeline-slider"></div>
+    <div class="app">
+        <!-- TELA INÍCIO -->
+        <div id="screen-inicio" class="screen active">
+            <div class="dashboard-header">
+                <div>
+                    <div class="user-greeting">Bem-vindo!</div>
+                    <div id="planoAtual" class="user-plan">Gratuito</div>
+                </div>
+                <div class="stats-quick">
+                    Ganho atual: <span class="ganho-atual">R$0.20</span>/spot
+                </div>
             </div>
-          </div>
+
+            <div class="card">
+                <div class="label">Destino</div>
+                <input id="destinoInput" placeholder="Av. Paulista, Centro...">
+                <button id="btnSalvarDestino">Buscar</button>
+                <div id="destinoAtual">Nenhum destino</div>
+            </div>
+
+            <div class="card">
+                <div class="timeline-container">
+                    <div class="timeline-header">
+                        <span>0 min</span>
+                        <span id="timelineCounter" class="timeline-counter">0 min</span>
+                        <span id="totalPlanMin">45 min</span>
+                    </div>
+                    <div id="timeline" class="timeline">
+                        <div class="timeline-bar">
+                            <div id="timelineSlider" class="timeline-slider"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spots-box">
+                    <div class="label">Spots do Trajeto</div>
+                    <div id="listaSpotsTrajeto" class="spot-list"></div>
+                    <div>
+                        Total: <span id="totalSpotsTrajeto">0</span> spots •
+                        <span id="duracaoTotalSpots">0 min</span>
+                    </div>
+                </div>
+
+                <button id="btnStart" class="button primary">Iniciar Corrida</button>
+            </div>
         </div>
 
-        <div class="spots-box">
-          <div class="label">Spots do Trajeto</div>
-          <div id="listaSpotsTrajeto" class="spot-list"></div>
-          <div>
-            Total: <span id="totalSpotsTrajeto">0</span> spots •
-            <span id="duracaoTotalSpots">0 min</span>
-          </div>
+        <!-- TELA BIBLIOTECA -->
+        <div id="screen-biblioteca" class="screen">
+            <div class="search-bar">
+                <input id="buscaSpots" placeholder="Buscar marcas ou spots...">
+            </div>
+            <div id="listaBiblioteca"></div>
         </div>
 
-        <button id="btnStart" class="button primary">Iniciar Corrida</button>
-      </div>
+        <!-- TELA PLANOS -->
+        <div id="screen-planos" class="screen">
+            <div class="planos-comparacao">
+                <div class="plano-card">
+                    <h3>Pro</h3>
+                    <div class="preco">R$19,90/mês</div>
+                    <ul class="plano-features">
+                        <li>+30¢/spot</li>
+                        <li>Analytics básicos</li>
+                    </ul>
+                    <button data-plano="pro" class="btn-assinar button">Assinar Pro</button>
+                </div>
+
+                <div class="plano-card recomendado">
+                    <div class="plano-badge">Mais Popular</div>
+                    <h3>Premium</h3>
+                    <div class="preco">R$49,90/mês</div>
+                    <ul class="plano-features">
+                        <li>+40¢/spot</li>
+                        <li>Suporte prioritário</li>
+                    </ul>
+                    <button data-plano="premium" class="btn-assinar button">Assinar Premium</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- TELA BIBLIOTECA -->
-    <div id="screen-biblioteca" class="screen">
-      <div class="search-bar">
-        <input id="buscaSpots" placeholder="Buscar marcas ou spots...">
-      </div>
-      <div id="listaBiblioteca"></div>
-    </div>
+    <!-- MENU INFERIOR -->
+    <nav class="menu">
+        <button class="menu-item active" data-screen="inicio">🏠 Início</button>
+        <button class="menu-item" data-screen="biblioteca">📚 Biblioteca</button>
+        <button class="menu-item" data-screen="planos">⭐ Planos</button>
+    </nav>
 
-    <!-- TELA PLANOS -->
-    <div id="screen-planos" class="screen">
-      <div class="planos-comparacao">
-        <div class="plano-card">
-          <h3>Pro</h3>
-          <div class="preco">R$19,90/mês</div>
-          <ul class="plano-features">
-            <li>+30¢/spot</li>
-            <li>Analytics básicos</li>
-          </ul>
-          <button data-plano="pro" class="btn-assinar button">Assinar Pro</button>
-        </div>
+    <!-- SCRIPTS (ordem importa!) -->
+    <script src="js/anunciantes.js"></script>
+    <script src="js/planos.js"></script>
+    <script src="js/spots.js"></script>
+    <script src="js/biblioteca.js"></script>
+    <script src="js/main.js"></script> 
 
-        <div class="plano-card recomendado">
-          <div class="plano-badge">Mais Popular</div>
-          <h3>Premium</h3>
-          <div class="preco">R$49,90/mês</div>
-          <ul class="plano-features">
-            <li>+40¢/spot</li>
-            <li>Suporte prioritário</li>
-          </ul>
-          <button data-plano="premium" class="btn-assinar button">Assinar Premium</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MENU INFERIOR -->
-  <nav class="menu">
-    <button class="menu-item active" data-screen="inicio">🏠 Início</button>
-    <button class="menu-item" data-screen="biblioteca">📚 Biblioteca</button>
-    <button class="menu-item" data-screen="planos">⭐ Planos</button>
-  </nav>
-
-  <!-- SCRIPTS (ordem importa!) -->
-  <script src="js/anunciantes.js"></script>
-  <!-- se você realmente tiver js/spots.js, mantenha esta linha; se não existir, remova -->
-  <!-- <script src="js/spots.js"></script> -->
-  <script src="js/plano.js"></script>       <!-- seu arquivo de planos -->
-  <script src="js/biblioteca.js"></script>
-  <script src="js/main.js"></script>        <!-- estava errado: era main.js na raiz -->
-
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').catch(console.error);
-    }
-  </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(console.error);
+        }
+    </script>
 </body>
+
 </html>
