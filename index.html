@@ -1,183 +1,105 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#0f172a">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>SpotMobi - Ganhe Dirigindo</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpotMobi - Ganhe nas Corridas</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3b82f6">
 </head>
-
 <body>
-    <div class="app">
-        <div id="screen-auth" class="screen active">
-            <h1>Seja Bem Vindo ao SpotMobi</h1>
-            <p>Ganhe dinheiro apenas fazendo o que você faz de melhor</p>
-            <button class="button" id="btnIrCadastro">Criar conta</button>
-            <button class="button" id="btnIrLogin">Entrar</button>
+  <div class="app">
+    <!-- TELA INÍCIO -->
+    <div id="screen-inicio" class="screen active">
+      <div class="dashboard-header">
+        <div>
+          <div class="user-greeting">Bem-vindo!</div>
+          <div id="planoAtual" class="user-plan">Gratuito</div>
         </div>
-
-        <!-- TELA CADASTRO -->
-        <div id="screen-cadastro" class="screen">
-            <h2>Criar conta</h2>
-
-            <div class="card form-login">
-                <label>
-                    Nome
-                    <input type="text" id="cadastroNome">
-                </label>
-
-                <label>
-                    E-mail ou telefone
-                    <input type="text" id="cadastroContato">
-                </label>
-
-                <label>
-                    Senha
-                    <input type="password" id="cadastroSenha">
-                </label>
-
-                <button class="button" id="btnCadastroConfirmar">Criar conta</button>
-                <button class="button" id="btnCadastroVoltar">Voltar</button>
-            </div>
+        <div class="stats-quick">
+          Ganho atual: <span class="ganho-atual">R$0.20</span>/spot
         </div>
+      </div>
 
-        <!-- TELA LOGIN -->
-        <div id="screen-login" class="screen">
-            <h2>Entrar</h2>
+      <div class="card">
+        <div class="label">Destino</div>
+        <input id="destinoInput" placeholder="Av. Paulista, Centro...">
+        <button id="btnSalvarDestino">Buscar</button>
+        <div id="destinoAtual">Nenhum destino</div>
+      </div>
 
-            <div class="card form-login">
-                <label>
-                    E-mail ou telefone
-                    <input type="text" id="loginContato">
-                </label>
-
-                <label>
-                    Senha
-                    <input type="password" id="loginSenha">
-                </label>
-
-                <button class="button" id="btnLoginConfirmar">Entrar</button>
-                <button class="button" id="btnLoginVoltar">Voltar</button>
+      <div class="card">
+        <div class="timeline-container">
+          <div class="timeline-header">
+            <span>0 min</span>
+            <span id="timelineCounter" class="timeline-counter">0 min</span>
+            <span id="totalPlanMin">45 min</span>
+          </div>
+          <div id="timeline" class="timeline">
+            <div class="timeline-bar">
+              <div id="timelineSlider" class="timeline-slider"></div>
             </div>
+          </div>
         </div>
-
-
-
-
-        <!-- TELA INICIO -->
-        <div id="screen-inicio" class="screen">
-            <!-- CARD DESTINO -->
-
-            <div class="card destino-card">
-                <h2>Destino</h2>
-
-                <div class="destino-box">
-                    <label for="destinoInput" class="destino-label">Para onde vamos?</label>
-                    <div class="destino-row">
-                        <input id="destinoInput" class="destino-input" type="text"
-                            placeholder="Ex: Centro, Paulista, Shopping..." />
-                        <button id="btnSalvarDestino" class="destino-btn">Salvar</button>
-                    </div>
-
-                    <p id="destinoAtual" class="destino-atual">
-                        Nenhum destino selecionado.
-                    </p>
-                </div>
-            </div>
-
-
-            <!-- CARD TIMELINE / SIMULAÇÃO -->
-            <div class="card timeline-card">
-                <div class="timeline-header">
-                    <span>Linha do tempo da corrida</span>
-                    <span id="timelineCounter" class="timeline-counter">0 min</span>
-                </div>
-
-                <div id="timeline" class="timeline">
-                    <div id="timelineSlider" class="timeline-slider"></div>
-                </div>
-
-                <p class="timeline-footer-text">
-                    Duração estimada: <span id="totalPlanMin">60 min</span>
-                </p>
-                <button id="btnStart" class="button">
-                    ▶️ Iniciar corrida
-                </button>
-            </div>
-
-
-            <!-- CARD RESUMO DA CORRIDA ATUAL (opcional, para integrar com corridas.js) -->
-            <div class="card spots-trajeto-card">
-                <div class="card-header">
-                    <h2>Spots do trajeto</h2>
-                    <span id="totalSpotsTrajeto" class="badge">0 spots</span>
-                </div>
-
-                <div id="listaSpotsTrajeto" class="spots-list">
-                    <!-- Spots serão inseridos via JS -->
-                    <div class="spot-placeholder">
-                        <span>Selecione um destino para ver os spots</span>
-                    </div>
-                </div>
-
-                <div class="spots-footer">
-                    <small>Duração total estimada: <span id="duracaoTotalSpots">0 min</span></small>
-                </div>
-            </div>
-
+        <div class="spots-box">
+          <div class="label">Spots do Trajeto</div>
+          <div id="listaSpotsTrajeto" class="spot-list"></div>
+          <div>Total: <span id="totalSpotsTrajeto">0</span> spots • <span id="duracaoTotalSpots">0 min</span></div>
         </div>
+        <button id="btnStart" class="button primary">Iniciar Corrida</button>
+      </div>
+    </div>
 
+    <!-- TELA BIBLIOTECA -->
+    <div id="screen-biblioteca" class="screen">
+      <div class="search-bar">
+        <input id="buscaSpots" placeholder="Buscar marcas ou spots...">
+      </div>
+      <div id="listaBiblioteca"></div>
+    </div>
 
-        <div id="screen-corridas" class="screen">
-            <div class="card">
-                <h2>Minhas corridas</h2>
-                <p class="destino-atual">
-                    Histórico de corridas simuladas com spots.
-                </p>
-
-                <div id="corridasList" class="corridas-list">
-                    <!-- itens de corrida serão inseridos via JS -->
-                </div>
-            </div>
+    <!-- TELA PLANOS -->
+    <div id="screen-planos" class="screen">
+      <div class="planos-comparacao">
+        <div class="plano-card">
+          <h3>Pro</h3>
+          <div class="preco">R$19.90/mês</div>
+          <ul class="plano-features">
+            <li>+30¢/spot</li>
+            <li>Analytics</li>
+          </ul>
+          <button data-plano="pro" class="btn-assinar button">Assinar Pro</button>
         </div>
-
-
-        <!-- TELA BIBLIOTECA - CORRETA -->
-        <div id="screen-biblioteca" class="screen">
-            <div class="card">
-                <h2>Minha Biblioteca</h2>
-
-                <div class="biblioteca-busca">
-                    <div class="biblioteca-busca-container">
-                        <input type="text" id="buscaSpots" placeholder="Buscar por nome, anunciante...">
-                    </div>
-                </div>
-
-                <div id="listaBiblioteca"></div>
-            </div>
+        <div class="plano-card recomendado">
+          <div class="plano-badge">Mais Popular</div>
+          <h3>Premium</h3>
+          <div class="preco">R$49.90/mês</div>
+          <ul class="plano-features">
+            <li>+40¢/spot</li>
+            <li>Suporte prioritário</li>
+          </ul>
+          <button data-plano="premium" class="btn-assinar button">Assinar Premium</button>
         </div>
+      </div>
+    </div>
+  </div>
 
-        <!-- SCRIPTS (ordem correta) -->
-       
-        <!-- 1. ANUNCIANTES (marcas) -->
-        <script src="js/anunciantes.js"></script>
-        <!-- 2. SPOTS (spots individuais) -->
-        <script src="js/spot.js"></script>
-        <!-- 3. MOTOR BIBLIOTECA (usa os 2 acima) -->
-        <script src="js/motor-biblioteca.js"></script>
-        <!-- 4. MENU -->
-        <script src="js/menu.js"></script>
-        <!-- 5. UI SCREENS (usa tudo) -->
-        <script src="js/ui-screens.js"></script>
-        <!-- 6. CORRIDAS -->
-        <script src="js/corridas.js"></script>
-        <!-- 7. MOTOR CORRIDA -->
-        <script src="js/motor-corrida.js"></script>
+  <!-- MENU INFERIOR -->
+  <nav class="menu">
+    <button class="menu-item active" data-screen="inicio">🏠 Início</button>
+    <button class="menu-item" data-screen="biblioteca">📚 Biblioteca</button>
+    <button class="menu-item" data-screen="planos">⭐ Planos</button>
+  </nav>
 
+  <!-- SCRIPTS -->
+  <script src="js/anunciantes.js"></script>
+  <script src="js/spots.js"></script>
+  <script src="js/planos.js"></script>
+  <script src="js/biblioteca.js"></script>
+  <script src="main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+  </script>
 </body>
-
 </html>
